@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DEBUG: "1"
+      SECRET_KEY: "local-dev-secret-not-for-production"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,backend"
+      # ブラウザから直接 Django に接続するため、localhost:3000 を許可
+      CORS_ALLOWED_ORIGINS: "http://localhost:3000,http://127.0.0.1:3000"
+    volumes:
+      # ローカル開発用: ホストの db.sqlite3 をマウントして永続化
+      - ./db.sqlite3:/app/db.sqlite3
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # ブラウザから到達できる Django の URL を bake-in する
+        NEXT_PUBLIC_API_BASE_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend

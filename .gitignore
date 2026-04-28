@@ -1,0 +1,30 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Django
+db.sqlite3
+staticfiles/
+*.log
+.env
+.env.*
+!.env.example
+
+# Node.js
+frontend/node_modules/
+frontend/.next/
+frontend/.env.local
+frontend/.env.*.local
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
